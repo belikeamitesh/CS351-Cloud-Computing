@@ -1,0 +1,58 @@
+yum install docker docker.io -y
+
+groupadd docker
+usermod -aG docker $(whoami)
+sudo service docker start
+
+sudo ocker pull python:3.8-slim
+sudo docker run -dit --name=pyContainer python:3.8-slim
+sudo docker exec -it pyContainer /bin/bash
+
+sudo docker container stop pyContainer
+sudo docker container rm pyContainer
+
+mkdir testfolder
+sudo docker run -dit --name=pyC -v /root/testfolder:/myfolder python:3.8-slim
+sudo docker exec -it pyC /bin/bash
+
+ls
+cd myfolder
+python main_1.py
+exit
+
+
+sudo docker run -dit --name=homepage -v /root/testfolder:/myfolder -p 8081:8000 node:14.18
+sudo docker exec -it homepage /bin/bash
+sudo cd myfolder
+sudo node index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
